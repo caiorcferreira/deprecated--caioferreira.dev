@@ -38,9 +38,8 @@ function Bio() {
               }}
             />
             <p>
-              Personal blog by <strong>{author}</strong>. I am passionate by
-              functional programming, software architecture and making simple
-              code.
+              I am passionate by functional programming, software architecture
+              and making simple code.
               {` `}
             </p>
             <div className="social" />

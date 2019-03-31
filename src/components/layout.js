@@ -8,45 +8,67 @@ class Layout extends React.Component {
     const { location, title } = this.props
     const rootPath = `${__PATH_PREFIX__}/`
 
-    if (location.pathname === rootPath) {
-      return (
-        <h1
+    const subtitle = (
+      <p>
+        Simple Made{" "}
+        <span
           style={{
-            ...scale(1.2),
-            marginBottom: rhythm(1.5),
-            marginTop: 0,
+            color: "var(--secondary)",
+            textDecoration: "line-through",
           }}
         >
-          <Link
+          Daily
+        </span>{" "}
+        (or whenever I can)
+      </p>
+    )
+
+    if (location.pathname === rootPath) {
+      return (
+        <div style={{ marginBottom: rhythm(1.5) }}>
+          <h1
             style={{
-              boxShadow: `none`,
-              textDecoration: `none`,
-              color: `inherit`,
+              ...scale(0.75),
+              marginBottom: 0,
+              marginTop: 0,
             }}
-            to={`/`}
           >
-            {title}
-          </Link>
-        </h1>
+            <Link
+              style={{
+                boxShadow: `none`,
+                textDecoration: `none`,
+                color: `inherit`,
+              }}
+              to={`/`}
+            >
+              {title}
+            </Link>
+          </h1>
+          {subtitle}
+        </div>
       )
     } else {
       return (
-        <h3
-          style={{
-            marginTop: 0,
-          }}
-        >
-          <Link
+        <span>
+          <h3
             style={{
-              boxShadow: `none`,
-              textDecoration: `none`,
-              color: `inherit`,
+              marginBottom: 0,
+              marginTop: 0,
             }}
-            to={`/`}
           >
-            {title}
-          </Link>
-        </h3>
+            <Link
+              style={{
+                boxShadow: `none`,
+                textDecoration: `none`,
+                color: `inherit`,
+              }}
+              to={`/`}
+            >
+              {title}
+            </Link>
+          </h3>
+          {subtitle}
+        </span>
       )
     }
   }
@@ -64,7 +86,7 @@ class Layout extends React.Component {
           style={{
             marginLeft: `auto`,
             marginRight: `auto`,
-            maxWidth: rhythm(26),
+            maxWidth: rhythm(24),
             color: `var(--primary)`,
             padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
           }}
