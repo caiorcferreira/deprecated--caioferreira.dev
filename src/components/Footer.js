@@ -30,9 +30,6 @@ export default () => (
   <footer
     style={{
       marginTop: rhythm(2.5),
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
     }}
   >
     <div>
@@ -55,7 +52,7 @@ export default () => (
     <p style={{ marginBottom: "0" }}>
       © {new Date().getFullYear()}, Built with
       {` `}
-      <a href="https://www.gatsbyjs.org">Gatsby</a>
+      <FooterLink href="https://www.gatsbyjs.org">Gatsby</FooterLink>
     </p>
   </footer>
 )

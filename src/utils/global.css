@@ -28,3 +28,15 @@
 body {
   font-family: "Montserrat", "sans-serif";
 }
+
+@media (max-width: 768px) {
+  footer {
+    flex-direction: column;
+  }
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
