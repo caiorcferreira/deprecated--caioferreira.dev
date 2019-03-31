@@ -1,0 +1,16 @@
+@import "../../node_modules/prismjs/themes/prism-okaidia.css";
+
+.gatsby-highlight {
+  background: #272822;
+  margin-bottom: 1.75rem;
+  margin-left: -1.3125rem;
+  margin-right: -1.3125rem;
+  border-radius: 10px;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.gatsby-highlight > pre[class*="language-"] {
+  overflow: auto;
+  padding: 1.3125rem;
+}
