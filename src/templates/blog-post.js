@@ -1,5 +1,6 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
+import Image from "gatsby-image"
 
 import Bio from "../components/bio"
 import Layout from "../components/layout"
@@ -11,6 +12,7 @@ class BlogPostTemplate extends React.Component {
     const post = this.props.data.markdownRemark
     const siteTitle = this.props.data.site.siteMetadata.title
     const { previous, next } = this.props.pageContext
+    const coverImage = post.frontmatter.cover_image
 
     return (
       <Layout location={this.props.location} title={siteTitle}>
@@ -19,6 +21,18 @@ class BlogPostTemplate extends React.Component {
           description={post.frontmatter.description || post.excerpt}
         />
         <h1>{post.frontmatter.title}</h1>
+        {Boolean(coverImage) && (
+          <Image
+            sizes={coverImage.childImageSharp.sizes}
+            alt="Post Cover Image"
+            style={{
+              marginLeft: "-50%",
+              marginRight: "-50%",
+              marginBottom: rhythm(2),
+              maxHeight: "28rem",
+            }}
+          />
+        )}
         <p
           style={{
             ...scale(-1 / 5),
@@ -84,6 +98,17 @@ export const pageQuery = graphql`
         title
         date(formatString: "MMMM DD, YYYY")
         description
+        cover_image {
+          publicURL
+          childImageSharp {
+            sizes(maxWidth: 1240) {
+              srcSet
+              sizes
+              src
+              aspectRatio
+            }
+          }
+        }
       }
     }
   }

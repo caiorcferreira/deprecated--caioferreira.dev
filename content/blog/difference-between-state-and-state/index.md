@@ -2,10 +2,10 @@
 title: Difference between state and State
 published: true
 description: Today we will try to solve the ambiguity in the concept of state, highlighting the differences in the two main notions about it.
+cover_image: ./cover.jpg
+date: "2018-12-18T12:00:00"
 tags: javascript, state machine, functional, oop
 ---
-
-![Figure 1 - A machine](./cover.jpg)
 
 Today we will try to solve the ambiguity in the concept of state, highlighting the differences in the two main notions about it. The post describes the nature of each one, some use cases and how they fit in the object and functional paradigms.
 
