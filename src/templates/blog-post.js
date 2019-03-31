@@ -35,15 +35,21 @@ class BlogPostTemplate extends React.Component {
         )}
         <p
           style={{
-            ...scale(-1 / 5),
-            display: `block`,
+            ...scale(-1 / 10),
+            display: `flex`,
+            justifyContent: "space-between",
+            color: `var(--secondary)`,
             marginBottom: rhythm(1),
             marginTop: rhythm(-1),
           }}
         >
-          {post.frontmatter.date}
+          <span>{post.frontmatter.date}</span>
+          <span>{post.timeToRead} min read</span>
         </p>
-        <div dangerouslySetInnerHTML={{ __html: post.html }} />
+        <div
+          style={{ textAlign: "justify" }}
+          dangerouslySetInnerHTML={{ __html: post.html }}
+        />
         <hr
           style={{
             marginBottom: rhythm(1),
@@ -92,6 +98,7 @@ export const pageQuery = graphql`
     }
     markdownRemark(fields: { slug: { eq: $slug } }) {
       id
+      timeToRead
       excerpt(pruneLength: 160)
       html
       frontmatter {
