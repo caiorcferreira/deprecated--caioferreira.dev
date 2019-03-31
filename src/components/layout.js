@@ -33,7 +33,6 @@ class Layout extends React.Component {
       return (
         <h3
           style={{
-            fontFamily: `Montserrat, sans-serif`,
             marginTop: 0,
           }}
         >
@@ -59,7 +58,6 @@ class Layout extends React.Component {
       <div
         style={{
           background: "var(--bg)",
-          // background: "red",
         }}
       >
         <div

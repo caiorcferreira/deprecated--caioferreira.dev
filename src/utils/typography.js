@@ -7,6 +7,10 @@ Wordpress2016.overrideThemeStyles = () => {
     a: {
       color: "var(--secondary)",
     },
+    "h1, h2, h3, h4, h5, h6": {
+      fontFamily: "inherit",
+      fontWeight: "800",
+    },
     "a.gatsby-resp-image-link": {
       boxShadow: `none`,
     },
