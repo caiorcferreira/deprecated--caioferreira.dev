@@ -2,6 +2,7 @@
 title: Using Technical Debt as your next Tool
 date: "2019-03-28T12:00:00"
 description: Some thoughts on how to identify and handle your project Technical Debt and use it in your favor.
+cover_image: ./cover.jpg
 tags: technicaldebt, quality, programming, management
 ---
 
