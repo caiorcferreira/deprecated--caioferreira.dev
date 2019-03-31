@@ -1,11 +1,11 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Starter Blog`,
-    author: `Kyle Mathews`,
+    title: `Caio Ferreira`,
+    author: `Caio Ferreira`,
     description: `A starter blog demonstrating what Gatsby can do.`,
     siteUrl: `https://gatsby-starter-blog-demo.netlify.com/`,
     social: {
-      twitter: `kylemathews`,
+      twitter: `caiorcferreira`,
     },
   },
   plugins: [
@@ -57,11 +57,11 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Gatsby Starter Blog`,
-        short_name: `GatsbyJS`,
+        name: `Caio Ferreira - Simple Made Daily`,
+        short_name: `Caio Ferreira`,
         start_url: `/`,
-        background_color: `#ffffff`,
-        theme_color: `#663399`,
+        background_color: `#EDEAFF`,
+        theme_color: `#0E103D`,
         display: `minimal-ui`,
         icon: `content/assets/gatsby-icon.png`,
       },
