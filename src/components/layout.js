@@ -1,6 +1,6 @@
 import React from "react"
 import { Link } from "gatsby"
-
+import Footer from "./Footer"
 import { rhythm, scale } from "../utils/typography"
 
 class Layout extends React.Component {
@@ -88,16 +88,17 @@ class Layout extends React.Component {
             marginRight: `auto`,
             maxWidth: rhythm(24),
             color: `var(--primary)`,
-            padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
+            padding: `
+              ${rhythm(1.5)} 
+              ${rhythm(3 / 4)} 
+              ${rhythm(1 / 2)} 
+              ${rhythm(3 / 4)}
+            `,
           }}
         >
           <header>{this.renderHeader()}</header>
           <main>{children}</main>
-          <footer>
-            © {new Date().getFullYear()}, Built with
-            {` `}
-            <a href="https://www.gatsbyjs.org">Gatsby</a>
-          </footer>
+          <Footer />
         </div>
       </div>
     )
