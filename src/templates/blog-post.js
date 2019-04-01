@@ -3,9 +3,9 @@ import { Link, graphql } from "gatsby"
 import { rhythm, scale } from "../utils/typography"
 import Image from "gatsby-image"
 
-import Bio from "../components/Bio"
-import Layout from "../components/Layout"
-import SEO from "../components/Seo"
+import Bio from "../components/Bio.component"
+import Layout from "../components/Layout.component"
+import SEO from "../components/Seo.component"
 
 class BlogPostTemplate extends React.Component {
   render() {

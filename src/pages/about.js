@@ -2,8 +2,8 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 import Image from "gatsby-image"
 
-import Layout from "../components/Layout"
-import SEO from "../components/Seo"
+import Layout from "../components/Layout.component"
+import SEO from "../components/Seo.component"
 import { rhythm } from "../utils/typography"
 
 class AboutMe extends React.Component {
