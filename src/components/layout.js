@@ -8,8 +8,12 @@ class Layout extends React.Component {
     const { location, title } = this.props
     const rootPath = `${__PATH_PREFIX__}/`
 
+    const headerTitleStyle = location.pathname.includes("/post/")
+      ? {}
+      : scale(0.8)
+
     const subtitle = (
-      <p>
+      <p style={{ marginBottom: 0 }}>
         Simple Made{" "}
         <span
           style={{
@@ -23,12 +27,19 @@ class Layout extends React.Component {
       </p>
     )
 
-    if (location.pathname === rootPath) {
-      return (
-        <div style={{ marginBottom: rhythm(1.5) }}>
+    return (
+      <section
+        style={{
+          marginBottom: rhythm(1.5),
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <span>
           <h1
             style={{
-              ...scale(0.8),
+              ...headerTitleStyle,
               marginBottom: 0,
               marginTop: 0,
             }}
@@ -45,32 +56,12 @@ class Layout extends React.Component {
             </Link>
           </h1>
           {subtitle}
-        </div>
-      )
-    } else {
-      return (
-        <span>
-          <h3
-            style={{
-              marginBottom: 0,
-              marginTop: 0,
-            }}
-          >
-            <Link
-              style={{
-                boxShadow: `none`,
-                textDecoration: `none`,
-                color: `inherit`,
-              }}
-              to={`/`}
-            >
-              {title}
-            </Link>
-          </h3>
-          {subtitle}
         </span>
-      )
-    }
+        <Link to="/about">
+          <p style={{ marginBottom: 0 }}>About me</p>
+        </Link>
+      </section>
+    )
   }
 
   render() {
@@ -80,13 +71,17 @@ class Layout extends React.Component {
       <div
         style={{
           background: "var(--bg)",
+          height: "100%",
         }}
       >
         <div
           style={{
+            display: "flex",
+            flexDirection: "column",
             marginLeft: `auto`,
             marginRight: `auto`,
             maxWidth: rhythm(24),
+            minHeight: "100vh",
             color: `var(--primary)`,
             padding: `
               ${rhythm(1.5)} 

@@ -29,6 +29,7 @@ const ICON_STYLE = {
 export default () => (
   <footer
     style={{
+      alignItem: "end",
       marginTop: rhythm(2.5),
     }}
   >
