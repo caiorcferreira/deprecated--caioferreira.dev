@@ -3,7 +3,7 @@ import styled from "styled-components"
 import { rhythm } from "../utils/typography"
 
 import Header from "./Header.component"
-import Footer from "./Footer"
+import Footer from "./Footer.component"
 
 class Layout extends React.Component {
   render() {
