@@ -14,12 +14,14 @@ class BlogPostTemplate extends React.Component {
     const siteTitle = this.props.data.site.siteMetadata.title
     const { previous, next } = this.props.pageContext
     const coverImage = post.frontmatter.cover_image
+    const tags = post.frontmatter.tags.split(",").map(t => t.trim()) || []
 
     return (
       <Layout location={this.props.location} title={siteTitle}>
         <SEO
           title={post.frontmatter.title}
           description={post.frontmatter.description || post.excerpt}
+          keywords={tags}
         />
         <h1>{post.frontmatter.title}</h1>
         {Boolean(coverImage) && (
@@ -29,8 +31,15 @@ class BlogPostTemplate extends React.Component {
           />
         )}
         <Metadata>
-          <span>{post.frontmatter.date}</span>
-          <span>{post.timeToRead} min read</span>
+          <PostDateAndTime>
+            <span>{post.frontmatter.date}</span>
+            <span>{post.timeToRead} min read</span>
+          </PostDateAndTime>
+          <TagListWrapper>
+            {tags.map(t => (
+              <Tag>#{t}</Tag>
+            ))}
+          </TagListWrapper>
         </Metadata>
         <Content dangerouslySetInnerHTML={{ __html: post.html }} />
         <Divider />
@@ -60,16 +69,50 @@ class BlogPostTemplate extends React.Component {
 const CoverImage = styled(Image)`
   margin-left: -50%;
   margin-right: -50%;
-  margin-bottom: ${rhythm(2)};
+  margin-bottom: ${rhythm(1)};
   max-height: 28rem;
+
+  @media (max-width: 768px) {
+    margin-left: -5%;
+    margin-right: -5%;
+  }
 `
 
 const Metadata = styled.p`
-  display: flex;
-  justify-content: space-between;
   color: var(--secondary);
   margin-bottom: ${rhythm(1)};
-  margin-top: ${rhythm(-1)};
+`
+
+const PostDateAndTime = styled.p`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+`
+
+const TagListWrapper = styled.p`
+  display: flex;
+
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+  }
+`
+
+const Tag = styled.p`
+  margin-bottom: 0;
+  margin-right: ${rhythm(1 / 4)};
+  padding: ${rhythm(1 / 50)} ${rhythm(1 / 3)};
+  border-radius: 3px;
+  background: var(--secondary);
+  color: var(--bg);
+
+  @media (max-width: 768px) {
+    &:last-child {
+      margin-bottom: 5px;
+    }
+
+    margin-bottom: 5px;
+    flex-wrap: wrap;
+  }
 `
 
 const Content = styled.section`
@@ -107,6 +150,7 @@ export const pageQuery = graphql`
         title
         date(formatString: "MMMM DD, YYYY")
         description
+        tags
         cover_image {
           publicURL
           childImageSharp {
