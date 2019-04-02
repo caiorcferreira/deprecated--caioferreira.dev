@@ -36,7 +36,11 @@ class BlogIndex extends React.Component {
                   {title}
                 </Link>
               </PostTittle>
-              <small>{node.frontmatter.date}</small>
+              <span>
+                <PostMetadataItem>{node.frontmatter.date}</PostMetadataItem>
+                &bull;{" "}
+                <PostMetadataItem>{node.timeToRead} min read</PostMetadataItem>
+              </span>
               <p
                 dangerouslySetInnerHTML={{
                   __html: node.frontmatter.description || node.excerpt,
@@ -54,6 +58,10 @@ const PostTittle = styled.h3`
   margin-bottom: ${rhythm(1 / 4)};
 `
 
+const PostMetadataItem = styled.small`
+  margin-right: ${rhythm(1 / 10)};
+`
+
 export default BlogIndex
 
 export const pageQuery = graphql`
@@ -67,6 +75,7 @@ export const pageQuery = graphql`
       edges {
         node {
           excerpt
+          timeToRead
           fields {
             slug
           }
