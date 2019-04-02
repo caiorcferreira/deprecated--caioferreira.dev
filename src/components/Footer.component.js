@@ -37,19 +37,19 @@ export default () => {
   return (
     <FooterWrapper>
       <SocialWrapper>
-        <FooterLink href={social.twitter}>
+        <FooterLink href={social.twitter} ariaLabel="Twitter">
           <Twiter alt="Caio Ferreira's Twitter Profile" style={ICON_STYLE} />
         </FooterLink>
-        <FooterLink href={social.dev}>
+        <FooterLink href={social.dev} ariaLabel="Dev Community">
           <Dev alt="Caio Ferreira's DEV Profile" style={ICON_STYLE} />
         </FooterLink>
-        <FooterLink href={social.github}>
+        <FooterLink href={social.github} ariaLabel="Github">
           <Github alt="Caio Ferreira's Github Profile" style={ICON_STYLE} />
         </FooterLink>
-        <FooterLink href={social.medium}>
+        <FooterLink href={social.medium} ariaLabel="Medium">
           <Medium alt="Caio Ferreira's Medium Profile" style={ICON_STYLE} />
         </FooterLink>
-        <FooterLink href={social.linkedin}>
+        <FooterLink href={social.linkedin} ariaLabel="Linkedin">
           <Linkedin alt="Caio Ferreira's LinkedIn Profile" style={ICON_STYLE} />
         </FooterLink>
       </SocialWrapper>
@@ -64,8 +64,15 @@ export default () => {
   )
 }
 
-const FooterLink = ({ children, style, ...props }) => (
-  <OutgoingLink style={style} target="_blank" {...props}>
+const FooterLink = ({ children, style, ariaLabel, ...props }) => (
+  <OutgoingLink
+    style={style}
+    target="_blank"
+    rel="noopener"
+    aria-label={ariaLabel}
+    aria-hidden={true}
+    {...props}
+  >
     {children}
   </OutgoingLink>
 )
