@@ -7,6 +7,9 @@ Wordpress2016.overrideThemeStyles = () => {
     a: {
       color: "var(--secondary)",
     },
+    "a:hover": {
+      color: "var(--hover)",
+    },
     "h1, h2, h3, h4, h5, h6": {
       fontFamily: "inherit",
       fontWeight: "800",

@@ -11,7 +11,6 @@ import { useStaticQuery, graphql } from "gatsby"
 const ICON_STYLE = {
   height: "30",
   width: "30",
-  fill: "var(--secondary)",
 }
 
 export default () => {
@@ -57,10 +56,7 @@ export default () => {
       <FooterMessage>
         © {new Date().getFullYear()}, Built with
         {` `}
-        <FooterLink
-          style={{ boxShadow: "0 1px 0 0 var(--secondary)" }}
-          href="https://www.gatsbyjs.org"
-        >
+        <FooterLink decoration={true} href="https://www.gatsbyjs.org">
           Gatsby
         </FooterLink>
       </FooterMessage>
@@ -75,9 +71,15 @@ const FooterLink = ({ children, style, ...props }) => (
 )
 
 const OutgoingLink = styled.a`
-  box-shadow: none;
+  box-shadow: ${props =>
+    props.decoration ? "0 1px 0 0 var(--secondary)" : "none"};
   color: var(--secondary);
   margin-right: ${rhythm(1 / 2)};
+  fill: var(--secondary);
+
+  &:hover {
+    fill: var(--hover);
+  }
 `
 
 const FooterWrapper = styled.footer`

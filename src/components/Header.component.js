@@ -58,11 +58,20 @@ const HeaderTitleLink = styled(Link)`
   box-shadow: none;
   text-decoration: none;
   color: inherit;
+
+  &:hover {
+    color: inherit;
+  }
 `
 
 const SubtitleDetail = styled.span`
   color: var(--secondary);
   text-decoration: line-through;
+
+  &:hover {
+    text-decoration: none;
+    color: var(--hover);
+  }
 `
 
 const NavigationLink = styled(Link)`
