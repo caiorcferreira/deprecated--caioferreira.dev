@@ -68,7 +68,7 @@ const FooterLink = ({ children, style, ariaLabel, ...props }) => (
   <OutgoingLink
     style={style}
     target="_blank"
-    rel="noopener"
+    rel="nofollow noopener noreferrer"
     aria-label={ariaLabel}
     aria-hidden={true}
     {...props}

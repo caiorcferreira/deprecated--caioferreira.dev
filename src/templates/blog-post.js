@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import { Link, graphql } from "gatsby"
-import { rhythm, scale } from "../utils/typography"
+import { rhythm } from "../utils/typography"
 import Image from "gatsby-image"
 
 import Bio from "../components/Bio.component"
