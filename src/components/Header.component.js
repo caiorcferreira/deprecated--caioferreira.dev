@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
-import { rhythm, scale } from "../utils/typography"
+import { scale } from "../utils/typography"
 
 export default ({ location, title }) => {
   const headerTitleStyle = location.pathname.includes("/post/")
@@ -75,9 +75,5 @@ const SubtitleDetail = styled.span`
 `
 
 const NavigationLink = styled(Link)`
-  box-shadow: -0.2px 1px 0 0 var(--secondary);
-
-  @media (min-width: 768px) {
-    box-shadow: 0 1px 0 0 var(--secondary);
-  }
+  box-shadow: 0 1.4px 0.4px -0.5px var(--secondary);
 `
