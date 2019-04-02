@@ -81,7 +81,7 @@ const OutgoingLink = styled.a`
 `
 
 const FooterWrapper = styled.footer`
-  align-items: flex-end;
+  align-items: center;
   margin-top: ${rhythm(2.5)};
 `
 

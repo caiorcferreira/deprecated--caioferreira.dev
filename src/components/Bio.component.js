@@ -34,7 +34,7 @@ function Bio() {
 
 const BioWrapper = styled.div`
   display: flex;
-  margin-bottom: ${rhythm(2.5)};
+  margin-top: ${rhythm(1)};
 `
 
 const Avatar = styled(Image)`

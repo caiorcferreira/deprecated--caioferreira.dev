@@ -22,12 +22,9 @@ export default ({ location, title }) => {
         </HeaderTitle>
         {subtitle}
       </HeaderTitleWrapper>
-      <Link
-        style={{ boxShadow: "-0.2px 1px 0 0 var(--secondary)" }}
-        to="/about"
-      >
+      <NavigationLink to="/about">
         <Text>About me</Text>
-      </Link>
+      </NavigationLink>
     </Header>
   )
 }
@@ -37,7 +34,6 @@ const Text = styled.p`
 `
 
 const Header = styled.header`
-  margin-bottom: ${rhythm(1.5)};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -67,4 +63,12 @@ const HeaderTitleLink = styled(Link)`
 const SubtitleDetail = styled.span`
   color: var(--secondary);
   text-decoration: line-through;
+`
+
+const NavigationLink = styled(Link)`
+  box-shadow: -0.2px 1px 0 0 var(--secondary);
+
+  @media (min-width: 768px) {
+    box-shadow: 0 1px 0 0 var(--secondary);
+  }
 `

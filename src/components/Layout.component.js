@@ -29,6 +29,7 @@ const Background = styled.div`
 
 const Container = styled.div`
   display: flex;
+  justify-content: space-between;
   flex-direction: column;
   margin-left: auto;
   margin-right: auto;
