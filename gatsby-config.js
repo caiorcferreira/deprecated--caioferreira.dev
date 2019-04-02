@@ -2,8 +2,15 @@ module.exports = {
   siteMetadata: {
     title: `Caio Ferreira`,
     author: `Caio Ferreira`,
-    description: `A starter blog demonstrating what Gatsby can do.`,
-    siteUrl: `https://gatsby-starter-blog-demo.netlify.com/`,
+    description: `A place to share ideas about simple code`,
+    siteUrl: `https://caioferreira.com/`,
+    keywords: [
+      `blog`,
+      `Caio Ferreira`,
+      `javascript`,
+      `functional programming`,
+      `software architecture`,
+    ],
     social: {
       twitter: `https://twitter.com/caiorcferreira`,
       dev: "https://dev.to/caiorcferreira",
@@ -82,7 +89,7 @@ module.exports = {
       resolve: "gatsby-plugin-react-svg",
       options: {
         rule: {
-          include: /assets/, // See below to configure properly
+          include: /assets/,
         },
       },
     },

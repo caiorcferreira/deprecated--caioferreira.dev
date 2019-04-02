@@ -15,10 +15,7 @@ class AboutMe extends React.Component {
 
     return (
       <Layout location={this.props.location} title={siteTitle}>
-        <SEO
-          title="About me"
-          keywords={[`blog`, `Caio Ferreira`, `javascript`]}
-        />
+        <SEO title="About me" />
         <AvatarWrapper>
           <Avatar
             fixed={data.avatar.childImageSharp.fixed}

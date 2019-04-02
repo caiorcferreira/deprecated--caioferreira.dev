@@ -19,6 +19,7 @@ function SEO({ description, lang, meta, keywords, title }) {
             title
             description
             author
+            keywords
           }
         }
       }
@@ -26,6 +27,9 @@ function SEO({ description, lang, meta, keywords, title }) {
   )
 
   const metaDescription = description || site.siteMetadata.description
+  const allKeywords = site.siteMetadata.keywords.concat(
+    keywords.length > 0 ? keywords : []
+  )
 
   return (
     <Helmet
@@ -67,16 +71,11 @@ function SEO({ description, lang, meta, keywords, title }) {
           name: `twitter:description`,
           content: metaDescription,
         },
-      ]
-        .concat(
-          keywords.length > 0
-            ? {
-                name: `keywords`,
-                content: keywords.join(`, `),
-              }
-            : []
-        )
-        .concat(meta)}
+        {
+          name: `keywords`,
+          content: allKeywords.join(`, `),
+        },
+      ].concat(meta)}
     />
   )
 }
