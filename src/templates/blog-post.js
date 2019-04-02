@@ -1,4 +1,5 @@
 import React from "react"
+import styled from "styled-components"
 import { Link, graphql } from "gatsby"
 import { rhythm, scale } from "../utils/typography"
 import Image from "gatsby-image"
@@ -22,50 +23,20 @@ class BlogPostTemplate extends React.Component {
         />
         <h1>{post.frontmatter.title}</h1>
         {Boolean(coverImage) && (
-          <Image
+          <CoverImage
             sizes={coverImage.childImageSharp.sizes}
             alt="Post Cover Image"
-            style={{
-              marginLeft: "-50%",
-              marginRight: "-50%",
-              marginBottom: rhythm(2),
-              maxHeight: "28rem",
-            }}
           />
         )}
-        <p
-          style={{
-            ...scale(-1 / 10),
-            display: `flex`,
-            justifyContent: "space-between",
-            color: `var(--secondary)`,
-            marginBottom: rhythm(1),
-            marginTop: rhythm(-1),
-          }}
-        >
+        <Metadata>
           <span>{post.frontmatter.date}</span>
           <span>{post.timeToRead} min read</span>
-        </p>
-        <div
-          style={{ textAlign: "justify" }}
-          dangerouslySetInnerHTML={{ __html: post.html }}
-        />
-        <hr
-          style={{
-            marginBottom: rhythm(1),
-          }}
-        />
+        </Metadata>
+        <Content dangerouslySetInnerHTML={{ __html: post.html }} />
+        <Divider />
         <Bio />
 
-        <ul
-          style={{
-            display: `flex`,
-            flexWrap: `wrap`,
-            justifyContent: `space-between`,
-            listStyle: `none`,
-            padding: 0,
-          }}
-        >
+        <Navigation>
           <li>
             {previous && (
               <Link to={previous.fields.slug} rel="prev">
@@ -80,11 +51,42 @@ class BlogPostTemplate extends React.Component {
               </Link>
             )}
           </li>
-        </ul>
+        </Navigation>
       </Layout>
     )
   }
 }
+
+const CoverImage = styled(Image)`
+  margin-left: -50%;
+  margin-right: -50%;
+  margin-bottom: ${rhythm(2)};
+  max-height: 28rem;
+`
+
+const Metadata = styled.p`
+  display: flex;
+  justify-content: space-between;
+  color: var(--secondary);
+  margin-bottom: ${rhythm(1)};
+  margin-top: ${rhythm(-1)};
+`
+
+const Content = styled.section`
+  text-align: justify;
+`
+
+const Divider = styled.hr`
+  margin-bottom: ${rhythm(1)};
+`
+
+const Navigation = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0;
+`
 
 export default BlogPostTemplate
 

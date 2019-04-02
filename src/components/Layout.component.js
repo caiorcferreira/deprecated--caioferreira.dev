@@ -1,4 +1,5 @@
 import React from "react"
+import styled from "styled-components"
 import { Link } from "gatsby"
 import Footer from "./Footer"
 import { rhythm, scale } from "../utils/typography"
@@ -6,61 +7,29 @@ import { rhythm, scale } from "../utils/typography"
 class Layout extends React.Component {
   renderHeader() {
     const { location, title } = this.props
-    const rootPath = `${__PATH_PREFIX__}/`
 
     const headerTitleStyle = location.pathname.includes("/post/")
       ? {}
       : scale(0.8)
 
     const subtitle = (
-      <p style={{ marginBottom: 0 }}>
-        Simple Made{" "}
-        <span
-          style={{
-            color: "var(--secondary)",
-            textDecoration: "line-through",
-          }}
-        >
-          Daily
-        </span>{" "}
-        (or whenever I can)
-      </p>
+      <Text>
+        Simple Made <SubtitleDetail>Daily</SubtitleDetail> (or whenever I can)
+      </Text>
     )
 
     return (
-      <section
-        style={{
-          marginBottom: rhythm(1.5),
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
+      <Header>
         <span>
-          <h1
-            style={{
-              ...headerTitleStyle,
-              marginBottom: 0,
-              marginTop: 0,
-            }}
-          >
-            <Link
-              style={{
-                boxShadow: `none`,
-                textDecoration: `none`,
-                color: `inherit`,
-              }}
-              to={`/`}
-            >
-              {title}
-            </Link>
-          </h1>
+          <HeaderTitle style={headerTitleStyle}>
+            <HeaderTitleLink to={`/`}>{title}</HeaderTitleLink>
+          </HeaderTitle>
           {subtitle}
         </span>
         <Link to="/about">
-          <p style={{ marginBottom: 0 }}>About me</p>
+          <Text>About me</Text>
         </Link>
-      </section>
+      </Header>
     )
   }
 
@@ -68,36 +37,58 @@ class Layout extends React.Component {
     const { children } = this.props
 
     return (
-      <div
-        style={{
-          background: "var(--bg)",
-          height: "100%",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            marginLeft: `auto`,
-            marginRight: `auto`,
-            maxWidth: rhythm(24),
-            minHeight: "100vh",
-            color: `var(--primary)`,
-            padding: `
-              ${rhythm(1.5)} 
-              ${rhythm(3 / 4)} 
-              ${rhythm(1 / 2)} 
-              ${rhythm(3 / 4)}
-            `,
-          }}
-        >
-          <header>{this.renderHeader()}</header>
+      <Background>
+        <Container>
+          {this.renderHeader()}
           <main>{children}</main>
           <Footer />
-        </div>
-      </div>
+        </Container>
+      </Background>
     )
   }
 }
+
+const Background = styled.div`
+  background: var(--bg);
+  height: 100%;
+`
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: ${rhythm(24)};
+  min-height: 100vh;
+  color: var(--primary);
+  padding: ${rhythm(1.5)} ${rhythm(3 / 4)} ${rhythm(1 / 2)} ${rhythm(3 / 4)};
+`
+
+const Text = styled.p`
+  margin-bottom: 0;
+`
+
+const Header = styled.header`
+  margin-bottom: ${rhythm(1.5)};
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+
+const HeaderTitle = styled.h1`
+  margin-bottom: 0;
+  margin-top: 0;
+`
+
+const HeaderTitleLink = styled(Link)`
+  box-shadow: none;
+  text-decoration: none;
+  color: inherit;
+`
+
+const SubtitleDetail = styled.span`
+  color: var(--secondary);
+  text-decoration: line-through;
+`
 
 export default Layout

@@ -1,4 +1,5 @@
 import React from "react"
+import styled from "styled-components"
 import Twiter from "../../content/assets/img/social/twitter.svg"
 import Dev from "../../content/assets/img/social/dev.svg"
 import Github from "../../content/assets/img/social/github.svg"
@@ -6,21 +7,6 @@ import Medium from "../../content/assets/img/social/medium.svg"
 import Linkedin from "../../content/assets/img/social/linkedin.svg"
 import { rhythm } from "../utils/typography"
 import { useStaticQuery, graphql } from "gatsby"
-
-const FooterLink = ({ children, style, ...props }) => (
-  <a
-    style={{
-      boxShadow: "none",
-      color: "var(--secondary)",
-      marginRight: rhythm(1 / 2),
-      ...style,
-    }}
-    target="_blank"
-    {...props}
-  >
-    {children}
-  </a>
-)
 
 const ICON_STYLE = {
   height: "30",
@@ -50,13 +36,8 @@ export default () => {
   const social = site.siteMetadata.social
 
   return (
-    <footer
-      style={{
-        alignItem: "end",
-        marginTop: rhythm(2.5),
-      }}
-    >
-      <div>
+    <FooterWrapper>
+      <SocialWrapper>
         <FooterLink href={social.twitter}>
           <Twiter alt="Caio Ferreira's Twitter Profile" style={ICON_STYLE} />
         </FooterLink>
@@ -72,8 +53,8 @@ export default () => {
         <FooterLink href={social.linkedin}>
           <Linkedin alt="Caio Ferreira's LinkedIn Profile" style={ICON_STYLE} />
         </FooterLink>
-      </div>
-      <p style={{ marginBottom: "0" }}>
+      </SocialWrapper>
+      <FooterMessage>
         © {new Date().getFullYear()}, Built with
         {` `}
         <FooterLink
@@ -82,7 +63,30 @@ export default () => {
         >
           Gatsby
         </FooterLink>
-      </p>
-    </footer>
+      </FooterMessage>
+    </FooterWrapper>
   )
 }
+
+const FooterLink = ({ children, style, ...props }) => (
+  <OutgoingLink style={style} target="_blank" {...props}>
+    {children}
+  </OutgoingLink>
+)
+
+const OutgoingLink = styled.a`
+  box-shadow: none;
+  color: var(--secondary);
+  margin-right: ${rhythm(1 / 2)};
+`
+
+const FooterWrapper = styled.footer`
+  align-items: flex-end;
+  margin-top: ${rhythm(2.5)};
+`
+
+const SocialWrapper = styled.section``
+
+const FooterMessage = styled.p`
+  margin-bottom: 0;
+`

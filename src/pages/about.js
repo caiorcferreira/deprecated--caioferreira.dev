@@ -1,5 +1,6 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
+import styled from "styled-components"
+import { graphql } from "gatsby"
 import Image from "gatsby-image"
 
 import Layout from "../components/Layout.component"
@@ -18,28 +19,16 @@ class AboutMe extends React.Component {
           title="About me"
           keywords={[`blog`, `Caio Ferreira`, `javascript`]}
         />
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "column",
-          }}
-        >
-          <Image
+        <AvatarWrapper>
+          <Avatar
             fixed={data.avatar.childImageSharp.fixed}
             alt={author}
-            style={{
-              marginTop: rhythm(1.5),
-              minWidth: 200,
-              borderRadius: `100%`,
-            }}
             imgStyle={{
               borderRadius: `50%`,
             }}
           />
-        </div>
-        <div style={{ marginTop: rhythm(1.5) }}>
+        </AvatarWrapper>
+        <Description>
           <p>
             I am a Software Engineer currently working at B2W, the biggest
             online retailer in Latin America. There, me and my team tackle the
@@ -56,11 +45,28 @@ class AboutMe extends React.Component {
             sharing this journey here, so please feel free to comment and
             present new ideas.
           </p>
-        </div>
+        </Description>
       </Layout>
     )
   }
 }
+
+const AvatarWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`
+
+const Avatar = styled(Image)`
+  margin-top: ${rhythm(1.5)};
+  min-width: 0;
+  border-radius: 100%;
+`
+
+const Description = styled.div`
+  margin-top: ${rhythm(1.5)};
+`
 
 export default AboutMe
 
