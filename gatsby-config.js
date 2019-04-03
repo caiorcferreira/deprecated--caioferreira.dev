@@ -3,7 +3,7 @@ module.exports = {
     title: `Caio Ferreira`,
     author: `Caio Ferreira`,
     description: `A place to share ideas about simple code`,
-    siteUrl: `https://caioferreira.com/`,
+    siteUrl: `https://caioferreira.dev/`,
     keywords: [
       `blog`,
       `Caio Ferreira`,
