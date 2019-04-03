@@ -17,6 +17,7 @@ module.exports = {
       github: "https://github.com/caiorcferreira",
       medium: "https://medium.com/@caiorcferreira",
       linkedin: "https://www.linkedin.com/in/caiorcferreira/",
+      icon: `content/assets/blog-icon.svg`,
     },
   },
   plugins: [
@@ -75,7 +76,7 @@ module.exports = {
         short_name: `Caio Ferreira`,
         start_url: `/`,
         background_color: `#fdfdff`,
-        theme_color: `#201b24`,
+        theme_color: `#db9d47`,
         display: `minimal-ui`,
       },
     },
