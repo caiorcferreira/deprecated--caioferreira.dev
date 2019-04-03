@@ -1,4 +1,5 @@
 # Simple Made ~~Daily~~ (or whenever I can)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/494bc11f-1de7-4373-93d9-a36071e2c245/deploy-status)](https://app.netlify.com/sites/caioferreira-personal-blog/deploys)
 
 My personal blog where I share my ideas about simple code and software development.
 
