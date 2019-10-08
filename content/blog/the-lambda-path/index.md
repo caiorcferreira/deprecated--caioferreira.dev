@@ -2,7 +2,7 @@
 title: "The Lambda Path"
 cover_image: ./cover.jpg
 published: true
-date: "2017-10-0T19:00:00"
+date: "2019-10-08T19:00:00"
 description: A collection of resources to help you out enter the world of Functional Programming
 tags: Functional,FP,Javascript,Clojure
 ---
