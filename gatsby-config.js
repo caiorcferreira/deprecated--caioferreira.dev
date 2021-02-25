@@ -78,6 +78,7 @@ module.exports = {
         background_color: `#fdfdff`,
         theme_color: `#db9d47`,
         display: `minimal-ui`,
+        icon: `content/assets/blog-icon.svg`,
       },
     },
     {
