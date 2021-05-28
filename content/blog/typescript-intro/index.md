@@ -3,6 +3,7 @@ title: "TypeSeries: Part 1 - Intro the JS world"
 date: "2017-08-10T12:00:00"
 description: One highway to Typescript and, maybe, others languages.
 tags: Typescript, JavaScript
+published: false
 ---
 
 This is my very first post on internet as someone who calls themself a â€˜developer’. I’m a undergraduate student yet, but I had my time working and I intend to share more my learning path than this thin experience.

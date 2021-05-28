@@ -4,9 +4,10 @@ date: "2019-04-16T12:00:00"
 description: Let's talk about why Gatsby is an incredible tool
 cover_image: ./cover.jpg
 tags: javascript, jam, gatsby, blogging
+published: true
 ---
 
-*Photo by [Patrick Fore](https://unsplash.com/photos/0gkw_9fy0eQ?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/search/photos/blog?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)*
+_Photo by [Patrick Fore](https://unsplash.com/photos/0gkw_9fy0eQ?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/search/photos/blog?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)_
 
 Recently I launched my own blog and it was an amazing experience. In about a Sunday I had made 90% of the site and enjoyed every moment. This was thanks to Gatsby and here I will show you why!
 
@@ -41,11 +42,13 @@ But the customization that I **most** **enjoyed** was the combination of Styled 
 ## Developer Experience
 
 You just need 3 commands to use Gatsby:
+
 ```bash
     $ npm install -g gatsby-cli
     $ gatsby develop # inside the starter repository
     $ gatsby build # when you are finished implementing your site
 ```
+
 And for adding plugins you just need to install an npm package and place its name in the `gatsby-config.js` file. It is easy, simple e fun to use! :smile:
 
 ## Simple and Fast Delivery
