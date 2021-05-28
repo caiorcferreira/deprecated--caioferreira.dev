@@ -61,6 +61,6 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\"",
-    "deploy": "gatsby build && gh-pages -d public -r https://github.com/caiorcferreira/caiorcferreira.github.io"
+    "deploy": "gatsby build && npx gh-pages -d public -r git@github.com:caiorcferreira/caiorcferreira.github.io.git"
   }
 }
