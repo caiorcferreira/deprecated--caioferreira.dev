@@ -1,7 +1,7 @@
 ---
 title: "The Kubernetes dynamic client"
 cover_image: ./cover.png
-published: false
+published: true
 date: "2021-05-28T19:00:00"
 description: A dive into a hidden tool to build Controllers and Operators
 tags: Go,Kubernetes,Testing
