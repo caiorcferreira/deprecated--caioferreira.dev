@@ -1,6 +1,6 @@
 ---
 title: "Implementing a safe and sound API Key authorization middleware in Go"
-cover_image: ./cover.png
+cover_image: ./cover.jpg
 published: false
 date: "2022-02-05T23:40:00"
 description: How to design a more secure API Key handling in Go
@@ -9,7 +9,7 @@ tags: Go,Security,Timing Attacks,Hash,API Key
 
 # Implementing a safe and sound API Key authorization middleware in Go
 
-A common requirement that I face on multiple projects is to safeguard some API endpoints to administrative access, or to provide a secure way for other applications to consume our service in a controlled and traceable manner. 
+A common requirement that I face on multiple projects is to safeguard some API endpoints to administrative access, or to provide a secure way for other applications to consume our service in a controlled and traceable manner.
 
 The usual solution for it is API Keys, a simple and effective authorization control mechanism that we can implement with a few lines of code. However, when doing, so we also need to be aware of threats and possible attacks that we may suffer, specially due to the usual privileges that these keys provides.
 
@@ -43,7 +43,7 @@ Having these threats in mind, we can design a suitable solution. Let's start wit
 
 ```go
 
-func ApiKeyMiddleware(cfg conf.Config, logger logging.Logger) func(handler http.Handler) http.Handler {  
+func ApiKeyMiddleware(cfg conf.Config, logger logging.Logger) func(handler http.Handler) http.Handler {
 	apiKeyHeader := cfg.APIKeyHeader // string
 	apiKeys := cfg.APIKeys // map[string]string
 
@@ -51,48 +51,48 @@ func ApiKeyMiddleware(cfg conf.Config, logger logging.Logger) func(handler http.
 	for name, key := apiKeys {
 		reverseKeyIndex[key] = name
 	}
-	
-	return func(next http.Handler) http.Handler {  
-		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {  
-			apiKey, err := bearerToken(r, apiKeyHeader)  
-			if err != nil {  
-				logger.Errorw("request failed API key authentication", "error", err)  
-				RespondError(w, http.StatusUnauthorized, "invalid API key")  
-				return  
-			}  
+
+	return func(next http.Handler) http.Handler {
+		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			apiKey, err := bearerToken(r, apiKeyHeader)
+			if err != nil {
+				logger.Errorw("request failed API key authentication", "error", err)
+				RespondError(w, http.StatusUnauthorized, "invalid API key")
+				return
+			}
 
 			_, found := reverseKeyIndex[apiKey]
 			if !found {
-				hostIP, _, err := net.SplitHostPort(r.RemoteAddr)  
-				if err != nil {  
-					logger.Errorw("failed to parse remote address", "error", err)  
-					hostIP = r.RemoteAddr  
-				}  
-				logger.Errorw("no matching API key found", "remoteIP", hostIP)  
-			
-				RespondError(w, http.StatusUnauthorized, "invalid api key")  
+				hostIP, _, err := net.SplitHostPort(r.RemoteAddr)
+				if err != nil {
+					logger.Errorw("failed to parse remote address", "error", err)
+					hostIP = r.RemoteAddr
+				}
+				logger.Errorw("no matching API key found", "remoteIP", hostIP)
+
+				RespondError(w, http.StatusUnauthorized, "invalid api key")
 				return
 			}
-			
-			
+
+
 			next.ServeHTTP(w, r)
 		})
-	}  
-}  
-  
+	}
+}
 
-// bearerToken extracts the content from the header, striping the Bearer prefix 
+
+// bearerToken extracts the content from the header, striping the Bearer prefix
 func bearerToken(r *http.Request, header string) (string, error) {
-	rawToken := r.Header.Get(header) 
-	pieces := strings.SplitN(rawToken, " ", 2) 
-	
-	if len(pieces) < 2 { 
-		return "", errors.New("token with incorrect bearer format") 
-	} 
+	rawToken := r.Header.Get(header)
+	pieces := strings.SplitN(rawToken, " ", 2)
 
-	token := strings.TrimSpace(pieces[1]) 
-	
-	return token, nil 
+	if len(pieces) < 2 {
+		return "", errors.New("token with incorrect bearer format")
+	}
+
+	token := strings.TrimSpace(pieces[1])
+
+	return token, nil
 }
 ```
 
@@ -100,13 +100,14 @@ A middleware is a function that takes an `http.Handler` and returns an `http.Han
 
 After extracting the fields that it relies on, the function creates a reverse index of the API Keys, which is originally a map from a key id/name to the key value. Using this reverse index it's trivial to verify if the user key is valid by doing a map lookup on line 18.
 
-However, this approach expects the API Keys as plaintext values and is susceptible to timing attacks, because its validation algorithm is not constant time. 
+However, this approach expects the API Keys as plaintext values and is susceptible to timing attacks, because its validation algorithm is not constant time.
 
 ### Using key hashes for validation
 
 To improve the key provisioning workflow, we can use a simple yet effective solution: expect the available keys to be hashes. Using this approach we can now commit our key hashes to our repository because even in the event of a data leak they could not be reversed to their original value.
 
 Let's use the SHA256 hashing algorithm to encode our keys. For example, if one of them is `123456789` (please, do not use a key like this :D) then its hash will be:
+
 ```
 15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225
 ```
@@ -117,7 +118,7 @@ Next, we need to handle this new format on our middleware. This is what the code
 
 ```go
 
-func ApiKeyMiddleware(cfg conf.Config, logger logging.Logger) func(handler http.Handler) http.Handler {  
+func ApiKeyMiddleware(cfg conf.Config, logger logging.Logger) func(handler http.Handler) http.Handler {
 	apiKeyHeader := cfg.APIKeyHeader // string
 	apiKeys := cfg.APIKeys // map[string]string
 
@@ -125,47 +126,47 @@ func ApiKeyMiddleware(cfg conf.Config, logger logging.Logger) func(handler http.
 	for name, key := apiKeys {
 		reverseKeyIndex[key] = name
 	}
-	
-	return func(next http.Handler) http.Handler {  
-		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {  
-			apiKey, err := bearerToken(r, apiKeyHeader)  
-			if err != nil {  
-				logger.Errorw("request failed API key authentication", "error", err)  
-				RespondError(w, http.StatusUnauthorized, "invalid API key")  
-				return  
-			}  
+
+	return func(next http.Handler) http.Handler {
+		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			apiKey, err := bearerToken(r, apiKeyHeader)
+			if err != nil {
+				logger.Errorw("request failed API key authentication", "error", err)
+				RespondError(w, http.StatusUnauthorized, "invalid API key")
+				return
+			}
 
 			_, ok := apiKeyIsValid(apiKey, reverseKeyIndex)
 			if !ok {
-				hostIP, _, err := net.SplitHostPort(r.RemoteAddr)  
-				if err != nil {  
-					logger.Errorw("failed to parse remote address", "error", err)  
-					hostIP = r.RemoteAddr  
-				}  
-				logger.Errorw("no matching API key found", "remoteIP", hostIP)  
-			
-				RespondError(w, http.StatusUnauthorized, "invalid api key")  
+				hostIP, _, err := net.SplitHostPort(r.RemoteAddr)
+				if err != nil {
+					logger.Errorw("failed to parse remote address", "error", err)
+					hostIP = r.RemoteAddr
+				}
+				logger.Errorw("no matching API key found", "remoteIP", hostIP)
+
+				RespondError(w, http.StatusUnauthorized, "invalid api key")
 				return
 			}
-			
-			
+
+
 			next.ServeHTTP(w, r)
 		})
-	}  
-}  
+	}
+}
 
-// apiKeyIsValid checks if the given API key is valid and returns the principal if it is.  
-func apiKeyIsValid(rawKey string, availableKeys map[string][]byte) (string, bool) {  
-	hash := sha256.Sum256([]byte(rawKey))  
+// apiKeyIsValid checks if the given API key is valid and returns the principal if it is.
+func apiKeyIsValid(rawKey string, availableKeys map[string][]byte) (string, bool) {
+	hash := sha256.Sum256([]byte(rawKey))
 	key := string(hash[:])
 
-	name, found := reverseKeyIndex[apiKey] 
+	name, found := reverseKeyIndex[apiKey]
 
 	return name, found
-}  
-  
+}
 
-// bearerToken function omited..
+
+// bearerToken function omitted..
 ```
 
 Here we extracted the logic to validate the key into a function that, before checking the equality of the user key against the available ones, encodes the user key using the same SHA256 algorithm.
@@ -179,72 +180,72 @@ This approach works well when there are few keys to be managed, and you want to 
 Once we have a better strategy to provision our keys, we need to defend ourselves against them being exfiltrated by timing attacks. The solution for this kind of vulnerability is to use an algorithm that takes the same time to produce a result whether the keys are equal or not. This is called a constant time comparison, and the Go Standard Library offers us an implementation in the `crypto/subtle` package that is perfect to solve most of our problems. Hence, we can update our code to use this package:
 
 ```go
-func ApiKeyMiddleware(cfg conf.Config, logger logging.Logger) (func(handler http.Handler) http.Handler, error) {  
-	apiKeyHeader := cfg.APIKeyHeader  
-	apiKeys := cfg.APIKeys  
-	apiKeyMaxLen := cfg.APIKeyMaxLen  
-	
-	decodedAPIKeys := make(map[string][]byte)  
-	for name, value := range apiKeys {  
-		decodedKey, err := hex.DecodeString(value)  
-		if err != nil {  
-			return nil, err  
-		}  
-		
-		decodedAPIKeys[name] = decodedKey  
+func ApiKeyMiddleware(cfg conf.Config, logger logging.Logger) (func(handler http.Handler) http.Handler, error) {
+	apiKeyHeader := cfg.APIKeyHeader
+	apiKeys := cfg.APIKeys
+	apiKeyMaxLen := cfg.APIKeyMaxLen
+
+	decodedAPIKeys := make(map[string][]byte)
+	for name, value := range apiKeys {
+		decodedKey, err := hex.DecodeString(value)
+		if err != nil {
+			return nil, err
+		}
+
+		decodedAPIKeys[name] = decodedKey
 	}
 
-	return func(next http.Handler) http.Handler {  
-		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {  
-			ctx := r.Context()  
-	
-			apiKey, err := bearerToken(r, apiKeyHeader)  
-			if err != nil {  
-				logger.Errorw("request failed API key authentication", "error", err)  
-				RespondError(w, http.StatusUnauthorized, "invalid API key")  
-				return  
-			}  
-			
-			if _, ok := apiKeyIsValid(apiKey, decodedAPIKeys); !ok {
-				 hostIP, _, err := net.SplitHostPort(r.RemoteAddr)  
-					if err != nil {  
-						logger.Errorw("failed to parse remote address", "error", err)  
-						hostIP = r.RemoteAddr  
-					}  
-					logger.Errorw("no matching API key found", "remoteIP", hostIP)  
-					
-					RespondError(w, http.StatusUnauthorized, "invalid api key")  
-					return
-			}  
+	return func(next http.Handler) http.Handler {
+		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			ctx := r.Context()
 
-			next.ServeHTTP(w, r.WithContext(ctx))  
-		}) 
-	}, nil  
-}  
-  
-// apiKeyIsValid checks if the given API key is valid and returns the principal if it is.  
-func apiKeyIsValid(rawKey string, availableKeys map[string][]byte) (string, bool) {  
-	hash := sha256.Sum256([]byte(rawKey))  
+			apiKey, err := bearerToken(r, apiKeyHeader)
+			if err != nil {
+				logger.Errorw("request failed API key authentication", "error", err)
+				RespondError(w, http.StatusUnauthorized, "invalid API key")
+				return
+			}
+
+			if _, ok := apiKeyIsValid(apiKey, decodedAPIKeys); !ok {
+				 hostIP, _, err := net.SplitHostPort(r.RemoteAddr)
+					if err != nil {
+						logger.Errorw("failed to parse remote address", "error", err)
+						hostIP = r.RemoteAddr
+					}
+					logger.Errorw("no matching API key found", "remoteIP", hostIP)
+
+					RespondError(w, http.StatusUnauthorized, "invalid api key")
+					return
+			}
+
+			next.ServeHTTP(w, r.WithContext(ctx))
+		})
+	}, nil
+}
+
+// apiKeyIsValid checks if the given API key is valid and returns the principal if it is.
+func apiKeyIsValid(rawKey string, availableKeys map[string][]byte) (string, bool) {
+	hash := sha256.Sum256([]byte(rawKey))
 	key := hash[:]
-  
-	for name, value := range availableKeys {   
-		contentEqual := subtle.ConstantTimeCompare(value, key) == 1  
-	
-		if contentEqual {  
-			return name, true  
-		}  
-	}  
-	
-	return "", false  
-}  
-  
+
+	for name, value := range availableKeys {
+		contentEqual := subtle.ConstantTimeCompare(value, key) == 1
+
+		if contentEqual {
+			return name, true
+		}
+	}
+
+	return "", false
+}
+
 // bearerToken function omitted...
 ```
 
-
-Now, the function `apiKeyIsValid` uses `subtle.ConstantTimeCompare` to verify the user key against each available key. Since `subtle.ConstantTimeCompare` operates upon byte slices we don't cast our hash to string anymore and also our reversed index has gone in place of a decoded map. 
+Now, the function `apiKeyIsValid` uses `subtle.ConstantTimeCompare` to verify the user key against each available key. Since `subtle.ConstantTimeCompare` operates upon byte slices we don't cast our hash to string anymore and also our reversed index has gone in place of a decoded map.
 
 The decoding is necessary because the string representation of our key hashes are actually a hexadecimal encoding of the binary value. Hence, we cannot just cast the string to byte slice because Go assumes all strings to be UTF-8 encoded.
+
 > Note: for an example on how using a cast instead of the correct decoding function, the result of `[]byte("09")` is `110000111001` while `hex.DecodeString("09")` produces `1001`. Check out the live example [here](https://go.dev/play/p/CPy16o7hvDO).
 
 The major disadvantage of this solution is that now we need to iterate over all available keys before finding out if the key is incorrect. This doesn't scale well if there are too many keys, however one simple workaround would be to require the client to send an extra header with the key ID/name, e.g. `X-App-Key-ID`, with which you can find the key in `O(1)` and then apply the constant time comparison.
@@ -253,4 +254,4 @@ However, there is one subtle (_pun intended_) behavior from `subtle.ConstantTime
 
 Finally, we've built a simple, secure and efficient API Key solution that should handle a lot of uses cases without additional infrastructure or complexity. Using a basic understanding of threats and the Golang standard library, we could do a security-oriented design instead of leaving security as an after-though in an iterative way.
 
-_Photo by  [Silas Köhler](https://unsplash.com/@silas_crioco?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/key?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)_
+_Photo by [Silas Köhler](https://unsplash.com/@silas_crioco?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/key?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)_
