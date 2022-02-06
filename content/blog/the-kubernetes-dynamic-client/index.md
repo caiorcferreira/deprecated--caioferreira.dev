@@ -432,4 +432,4 @@ This asserting function allows for more conditions to be added, like verifying l
 
 ## Conclusion
 
-The Kubernetes ecosystem is rich and every now and then we stumble upon this kind of treasure. I strongly recommend reading through the documentation not only of the [`k8s.io/client-go`](http://k8s.io/client-go) but also other like [`sigs.k8s.io/controller-runtime`](https://pkg.go.dev/sigs.k8s.io/controller-runtime) project and the [Kubernetes Reference API](https://kubernetes.io/docs/reference/kubernetes-api/) documentation.
+The Kubernetes ecosystem is rich and every now and then we stumble upon this kind of treasure. I strongly recommend reading through the documentation not only of the [`k8s.io/client-go`](http://k8s.io/client-go) project but also from the [`sigs.k8s.io/controller-runtime`](https://pkg.go.dev/sigs.k8s.io/controller-runtime) project and the [Kubernetes Reference API](https://kubernetes.io/docs/reference/kubernetes-api/) documentation.
