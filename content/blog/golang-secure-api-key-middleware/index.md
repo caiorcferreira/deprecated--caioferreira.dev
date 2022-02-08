@@ -1,7 +1,7 @@
 ---
 title: "Implementing a safe and sound API Key authorization middleware in Go"
 cover_image: ./cover.jpg
-published: false
+published: true
 date: "2022-02-05T23:40:00"
 description: How to design a more secure API Key handling in Go
 tags: Go,Security,Timing Attacks,Hash,API Key
