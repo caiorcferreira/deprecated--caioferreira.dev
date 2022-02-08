@@ -254,4 +254,6 @@ However, there is one subtle (_pun intended_) behavior from `subtle.ConstantTime
 
 Finally, we've built a simple, secure and efficient API Key solution that should handle a lot of uses cases without additional infrastructure or complexity. Using a basic understanding of threats and the Golang standard library, we could do a security-oriented design instead of leaving security as an after-though in an iterative way.
 
-_Photo by [Silas Köhler](https://unsplash.com/@silas_crioco?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/key?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)_
+---
+
+Photo by [Silas Köhler](https://unsplash.com/@silas_crioco?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/key?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).

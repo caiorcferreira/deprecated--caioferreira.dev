@@ -57,7 +57,7 @@
   "scripts": {
     "build": "NODE_OPTIONS=--openssl-legacy-provider gatsby build",
     "clean": "gatsby clean",
-    "develop": "gatsby develop",
+    "develop": "NODE_OPTIONS=--openssl-legacy-provider gatsby develop",
     "format": "prettier --write src/**/*.{js,jsx}",
     "start": "npm run develop",
     "serve": "gatsby serve",
